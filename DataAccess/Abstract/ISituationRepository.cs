@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace DataAccess.Abstract
 {
-    internal interface ISituationRepository : IRepository<Situation>
+    public interface ISituationRepository : IRepository<Situation>
     {
 
     }
