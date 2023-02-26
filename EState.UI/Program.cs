@@ -3,6 +3,8 @@ using Entity.Entities;
 using EState.UI.Areas.Admin.Identity;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.Hosting;
+using System.Diagnostics;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -30,7 +32,14 @@ builder.Services.Configure<IdentityOptions>(opt =>
 
     opt.User.AllowedUserNameCharacters = "abcçdefgğhıijklmnoöprsştuüvyzABCÇDEFGĞHIİJKLMNOÖPRSŞTUÜVYZ0123456789-._";
 });
-
+builder.Services.ConfigureApplicationCookie(opt =>
+{
+    opt.LoginPath = "/Admin/Admin/Login/";
+    opt.LogoutPath = "/Admin/Admin/LogOut";
+    opt.AccessDeniedPath = "/Admin/Admin/AccessDeniedPath";
+    opt.ExpireTimeSpan = TimeSpan.FromMinutes(6);
+});
+builder.Services.AddSession();
 
 
 var app = builder.Build();
@@ -49,8 +58,9 @@ app.UseHttpsRedirection();
 app.UseStaticFiles();
 
 app.UseRouting();
-
+app.UseAuthentication();
 app.UseAuthorization();
+app.UseSession();
 
 app.UseEndpoints(endpoints =>
 {
