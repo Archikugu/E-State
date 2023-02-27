@@ -1,0 +1,12 @@
+﻿
+<option value="">Mahalle Seçiniz</option>
+
+@if (ViewBag.neighbourhood != null)
+{
+
+    @foreach (var item in ViewBag.neighbourhood)
+    {
+        <option value="@item.Value">@item.Text</option>
+    }
+
+}
