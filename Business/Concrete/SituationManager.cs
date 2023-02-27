@@ -10,7 +10,7 @@ using System.Threading.Tasks;
 
 namespace Business.Concrete
 {
-    public class SituationManager : IGenericService<Situation>
+    public class SituationManager : ISituationService
     {
         ISituationRepository _situationRepository;
 

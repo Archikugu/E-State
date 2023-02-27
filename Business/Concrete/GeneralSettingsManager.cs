@@ -10,7 +10,7 @@ using System.Threading.Tasks;
 
 namespace Business.Concrete
 {
-    public class GeneralSettingsManager : IGenericService<GeneralSettings>
+    public class GeneralSettingsManager : IGeneralSettingsService
     {
         IGeneralSettingsRepository _generalSettingsRepository;
 

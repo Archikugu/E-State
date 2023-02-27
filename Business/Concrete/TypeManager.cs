@@ -9,7 +9,7 @@ using System.Threading.Tasks;
 
 namespace Business.Concrete
 {
-    public class TypeManager : IGenericService<Entity.Entities.Type>
+    public class TypeManager : ITypeService
     {
         ITypeRepository _typeRepository;
 

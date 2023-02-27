@@ -10,7 +10,7 @@ using System.Threading.Tasks;
 
 namespace Business.Concrete
 {
-    public class AdvertManager : IGenericService<Advert>
+    public class AdvertManager : IAdvertService
     {
         IAdvertRepository _advertRepository;
 

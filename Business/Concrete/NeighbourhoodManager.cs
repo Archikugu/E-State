@@ -10,7 +10,7 @@ using System.Threading.Tasks;
 
 namespace Business.Concrete
 {
-    public class NeighbourhoodManager : IGenericService<Neighbourhood>
+    public class NeighbourhoodManager : INeighbourhoodService
     {
         INeighbourhoodRepository _neighbourhoodRepository;
 

@@ -10,7 +10,7 @@ using System.Threading.Tasks;
 
 namespace Business.Concrete
 {
-    public class DistrictManager : IGenericService<District>
+    public class DistrictManager : IDistrictService
     {
         IDistrictRepository _districtRepository;
 

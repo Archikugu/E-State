@@ -11,7 +11,7 @@ using System.Threading.Tasks;
 
 namespace Business.Concrete
 {
-    public class CityManager : IGenericService<City>
+    public class CityManager : ICityService
     {
         ICityRepository _cityRepository;
 

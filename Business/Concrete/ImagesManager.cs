@@ -10,7 +10,7 @@ using System.Threading.Tasks;
 
 namespace Business.Concrete
 {
-    public class ImagesManager : IGenericService<Images>
+    public class ImagesManager : IImagesService
     {
         IImagesRepository _imagesRepository;
 
