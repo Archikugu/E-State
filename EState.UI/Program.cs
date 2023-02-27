@@ -1,4 +1,8 @@
-﻿using DataAccess.Data;
+﻿using Business.Abstract;
+using Business.Concrete;
+using DataAccess.Abstract;
+using DataAccess.Concrete;
+using DataAccess.Data;
 using Entity.Entities;
 using EState.UI.Areas.Admin.Identity;
 using Microsoft.AspNetCore.Identity;
@@ -41,6 +45,23 @@ builder.Services.ConfigureApplicationCookie(opt =>
 });
 builder.Services.AddSession();
 
+builder.Services.AddScoped<IAdvertService, AdvertManager>();
+builder.Services.AddScoped<ICityService, CityManager>();
+builder.Services.AddScoped<IDistrictService, DistrictManager>();
+builder.Services.AddScoped<IGeneralSettingsService, GeneralSettingsManager>();
+builder.Services.AddScoped<IImagesService, ImagesManager>();
+builder.Services.AddScoped<INeighbourhoodService, NeighbourhoodManager>();
+builder.Services.AddScoped<ISituationService, SituationManager>();
+builder.Services.AddScoped<ITypeService, TypeManager>();
+
+builder.Services.AddScoped<IAdvertRepository, EfAdvertRepository>();
+builder.Services.AddScoped<ICityRepository, EfCityRepository>();
+builder.Services.AddScoped<IDistrictRepository, EfDistrictRepository>();
+builder.Services.AddScoped<IGeneralSettingsRepository, EfGeneralSettingsRepository>();
+builder.Services.AddScoped<IImagesRepository, EfImagesRepository>();
+builder.Services.AddScoped<INeighbourhoodRepository, EfNeighbourhoodRepository>();
+builder.Services.AddScoped<ISituationRepository, EfSituationRepository>();
+builder.Services.AddScoped<ITypeRepository, EfTypeRepository>();
 
 var app = builder.Build();
 
