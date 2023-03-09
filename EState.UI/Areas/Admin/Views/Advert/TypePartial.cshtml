@@ -1,10 +1,9 @@
 ﻿
 <option value="">Tip Seçiniz</option>
 
-@if (ViewBag.type != null)
-{
+@if (ViewBag.typeList != null) {
 
-    @foreach (var item in ViewBag.type)
+    @foreach (var item in ViewBag.typeList)
     {
         <option value="@item.Value">@item.Text</option>
     }

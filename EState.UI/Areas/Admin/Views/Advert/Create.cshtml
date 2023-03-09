@@ -26,19 +26,19 @@
                             <br />
 
                             <label>Fiyat</label>
-                            <textarea cols="4" rows="4" asp-for="Price" class="form-control"></textarea>
+                            <input type="text" asp-for="Price" />
                             <span asp-validation-for="Price" class="text text-danger"></span>
 
                             <br />
 
                             <label>Oda Sayısı</label>
-                            <textarea cols="4" rows="4" asp-for="NumberOfRooms" class="form-control"></textarea>
+                            <input type="text" asp-for="NumberOfRooms" />
                             <span asp-validation-for="NumberOfRooms" class="text text-danger"></span>
 
                             <br />
 
                             <label>Banyo Sayısı</label>
-                            <textarea cols="4" rows="4" asp-for="BathroomNumbers" class="form-control"></textarea>
+                            <input type="text" asp-for="BathroomNumbers" />
                             <span asp-validation-for="BathroomNumbers" class="text text-danger"></span>
 
                             <br />
@@ -50,7 +50,7 @@
                             <br />
 
                             <label>Garaj</label>
-                            <textarea cols="4" rows="4" asp-for="Garage" class="form-control"></textarea>
+                            <input type="text" asp-for="Garage" />
                             <span asp-validation-for="Garage" class="text text-danger"></span>
 
                             <br />
@@ -110,7 +110,7 @@
                             <br />
 
                             <label>Adress</label>
-                            <input type="text" asp-for="Address" />
+                            <textarea cols="4" rows="4" asp-for="Address" class="form-control"></textarea>
                             <span asp-validation-for="Address" class="text text-danger"></span>
 
                             <br />
@@ -118,8 +118,7 @@
                             <label>Şehir</label>
                             <select asp-for="CityId" id="CityId" class="form-control">
                                 <option value="0" selected>Şeçiniz</option>
-                                @foreach (var item in ViewBag.cityList)
-                                {
+                                @foreach (var item in ViewBag.cityList) {
                                     <option value="@item.Value">@item.Text</option>
                                 }
                             </select>
@@ -129,7 +128,9 @@
                             <label>Semt</label>
                             <select asp-for="DistrictId" id="DistrictId" class="form-control">
                                 <option value="0" selected>Şeçiniz</option>
-                                <option value="DistrictId"></option>
+                                @foreach (var item in ViewBag.districtList) {
+                                    <option value="@item.Value">@item.Text</option>
+                                }
 
                             </select>
 
@@ -138,8 +139,9 @@
                             <label>Mahalle</label>
                             <select asp-for="NeighbourhoodId" id="NeighbourhoodId" class="form-control">
                                 <option value="0" selected>Şeçiniz</option>
-                                <option value="NeighbourhoodId"></option>
-
+                                @foreach (var item in ViewBag.neighbourhoodList) {
+                                    <option value="@item.Value">@item.Text</option>
+                                }
                             </select>
 
                             <br />
@@ -147,8 +149,7 @@
                             <label>Durum</label>
                             <select asp-for="SituationId" id="SituationId" class="form-control">
                                 <option value="0" selected>Şeçiniz</option>
-                                @foreach (var item in ViewBag.situations)
-                                {
+                                @foreach (var item in ViewBag.situationList) {
                                     <option value="@item.Value">@item.Text</option>
                                 }
                             </select>
@@ -158,7 +159,9 @@
                             <label>Tip</label>
                             <select asp-for="TypeId" id="TypeId" class="form-control">
                                 <option value="0" selected>Şeçiniz</option>
-                                <option value="TypeId"></option>
+                                @foreach (var item in ViewBag.typeList) {
+                                    <option value="@item.Value">@item.Text</option>
+                                }
 
                             </select>
 
@@ -179,57 +182,35 @@
         </div>
     </div>
 </div>
+<script src="~/Admin/vendor/jquery/jquery.min.js"></script>
 
 <script type="text/javascript">
     $(document).ready(function () {
 
         $("#CityId").change(function () {
-            var cityId =$(this).val();
-
-            debugger
-
-            $ajax({
-                type:"Post",
-                url:"/Admin/Advert/DistrictGet?CityId="+cityId,
-                contentType:"html",
-
-                success:function(response){
-                    debugger
-
-                    $("#DistrictId").empty();
-                    $("#DistrictId").append(response);
-                }
-            });
-         });
-    });
-
-</script>
-
-
-<script type="text/javascript">
-    $(document).ready(function () {
-
-        $("#SituationId").change(function () {
-            var situationId = $(this).val();
+            var cityId = $(this).val();
 
             debugger
 
             $ajax({
                 type: "Post",
-                url: "/Admin/Advert/TypeGet?SituationId=" + situationId,
+                url: "/Admin/Advert/CityGet?CityId=" + cityId,
                 contentType: "html",
 
                 success: function (response) {
                     debugger
 
-                    $("#TypeId").empty();
-                    $("#TypeId").append(response);
+                    $("#CityId").empty();
+                    $("#CityId").append(response);
                 }
             });
         });
     });
 
+
 </script>
+
+
 
 <script type="text/javascript">
     $(document).ready(function () {
@@ -241,7 +222,58 @@
 
             $ajax({
                 type: "Post",
-                url: "/Admin/Advert/NeighbourhoodGet?DistrictId=" + districtId,
+                url: "/Admin/Advert/DistrictGet?DistrictId=" + districtId,
+                contentType: "html",
+
+                success: function (response) {
+                    debugger
+
+                    $("#DistrictId").empty();
+                    $("#DistrictId").append(response);
+                }
+            });
+        });
+    });
+
+
+</script>
+
+<script type="text/javascript">
+    $(document).ready(function () {
+
+        $("#SituationId").change(function () {
+            var situationId = $(this).val();
+
+            debugger
+
+            $ajax({
+                type: "Post",
+                url: "/Admin/Advert/SituationGet?SituationId=" + situationId,
+                contentType: "html",
+
+                success: function (response) {
+                    debugger
+
+                    $("#SituationId").empty();
+                    $("#SituationId").append(response);
+                }
+            });
+        });
+    });
+
+</script>
+
+<script type="text/javascript">
+    $(document).ready(function () {
+
+        $("#NeighbourhoodId").change(function () {
+            var neighbourhoodId = $(this).val();
+
+            debugger
+
+            $ajax({
+                type: "Post",
+                url: "/Admin/Advert/NeighbourhoodGet?NeighbourhoodId=" + neighbourhoodId,
                 contentType: "html",
 
                 success: function (response) {
@@ -249,6 +281,33 @@
 
                     $("#NeighbourhoodId").empty();
                     $("#NeighbourhoodId").append(response);
+                }
+            });
+        });
+    });
+
+
+</script>
+
+
+<script type="text/javascript">
+    $(document).ready(function () {
+
+        $("#TypeId").change(function () {
+            var typeId = $(this).val();
+
+            debugger
+
+            $ajax({
+                type: "Post",
+                url: "/Admin/Advert/TypeGet?TypeId=" + typeId,
+                contentType: "html",
+
+                success: function (response) {
+                    debugger
+
+                    $("#TypeId").empty();
+                    $("#TypeId").append(response);
                 }
             });
         });

@@ -21,6 +21,8 @@ namespace Business.Concrete
 
         public void Add(Advert item)
         {
+            item.Status = true;
+            item.AdvertDate= DateTime.Now;
             _advertRepository.Add(item);
         }
 

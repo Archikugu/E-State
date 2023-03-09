@@ -23,9 +23,17 @@
     <!-- Custom styles for this template-->
     <link href="~/Admin/css/sb-admin-2.css" rel="stylesheet">
 
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js"></script>
+
 </head>
 
 <body id="page-top">
+    @if (TempData["Success"] != null) {
+        <script type="text/javascript">
+            toastr.success('@TempData["Success"]', 'Başarılı');
+        </script>
+
+    }
 
     <!-- Page Wrapper -->
     <div id="wrapper">
@@ -316,9 +324,12 @@
         </div>
     </div>
 
+
+
     <!-- Bootstrap core JavaScript-->
-    <script src="~/Admin/vendor/jquery/jquery.min.js"></script>
+
     <script src="~/Admin/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+    <script src="~/Admin/vendor/jquery/jquery.min.js"></script>
 
     <!-- Core plugin JavaScript-->
     <script src="~/Admin/vendor/jquery-easing/jquery.easing.min.js"></script>

@@ -23,11 +23,13 @@ namespace DataAccess.Concrete
         public void Add(T item)
         {
             _object.Add(item);
+            context.SaveChanges();
         }
 
         public void Delete(T item)
         {
             _object.Remove(item);
+            context.SaveChanges();
         }
 
         public T GetById(int id)
@@ -48,6 +50,7 @@ namespace DataAccess.Concrete
         public void Update(T item)
         {
             _object.Update(item);
+            context.SaveChanges();
         }
     }
 }

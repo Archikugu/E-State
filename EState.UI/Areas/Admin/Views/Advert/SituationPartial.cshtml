@@ -1,0 +1,9 @@
+﻿<option value="">Durum Seçiniz</option>
+
+@if (ViewBag.situationList != null) {
+
+    @foreach (var item in ViewBag.situationList) {
+        <option value="@item.Value">@item.Text</option>
+    }
+
+}
