@@ -2,8 +2,7 @@
 @{
     ViewData["Title"] = "Index";
 }
-@if (Model.Count == 0)
-{
+@if (Model.Count == 0) {
     <div class="container">
         <div class="row">
             <div class="col-md-6">
@@ -12,8 +11,7 @@
         </div>
     </div>
 }
-else
-{
+else {
     <table class="table table-bordered table table-striped">
         <tr>
             <th>Açıklama</th>
@@ -28,8 +26,7 @@ else
             <th>Güncelle</th>
         </tr>
         <tbody>
-            @foreach (var item in Model)
-            {
+            @foreach (var item in Model) {
                 <tr>
                     <td>@item.Descriptions</td>
                     <td>@item.Price</td>
@@ -38,13 +35,42 @@ else
                     <td>@item.Area</td>
                     <td>@item.Floor</td>
                     <td>@item.Address</td>
-                    <td><a class="btn btn-success" asp-action="AdvertImages" asp-route-id="@item.AdvertId"></a></td>
-                    <td><a class="btn btn-danger" asp-action="Delete" asp-route-id="@item.AdvertId"></a></td>
-                    <td><a class="btn btn-primary" asp-action="Update" asp-route-id="@item.AdvertId"></a></td>
+                    <td><a class="btn btn-success" asp-action="AdvertImages" asp-route-id="@item.AdvertId">İlan Resimleri</a></td>
+                    <td><a class="btn btn-danger" data-id="@item.AdvertId" id="delete">Sil</a></td>
+                    <td><a class="btn btn-primary" asp-action="Update" asp-route-id="@item.AdvertId">Güncelle</a></td>
 
                 </tr>
             }
         </tbody>
     </table>
-    <a class="btn btn-primary" asp-action="Create">Create</a>
 }
+<br />
+<a class="btn btn-primary" asp-action="Create">Create</a>
+
+<script type="text/javascript">
+    $("#table").on("click", "#delete", function () {
+        var id = $(this).data("id");
+        swal({
+            title: "Silmek İstiyor musunuz ?",
+            text: "İlan Silinecek silmek istediğinize emin misiniz!",
+            icon: "warning",
+            buttons: true,
+            dangerMode: true,
+        })
+            .then((willDelete) => {
+                if (willDelete) {
+                    $ajax({
+                        type: "GET",
+                        url: "/Admin/Advert/Delete=" + id,
+
+                        success: function () {
+                            toastr.error("İlan silme işlemi başarıyla gerçekleşti.")
+                        }
+                    });
+
+                    $(this).parent("td").parent("tr").remove();
+                }
+            });
+    });
+</script>
+

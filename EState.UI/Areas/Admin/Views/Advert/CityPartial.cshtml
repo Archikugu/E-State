@@ -1,9 +1,0 @@
-﻿<option value="">Şehir Seçiniz</option>
-
-@if (ViewBag.cityList != null) {
-
-    @foreach (var item in ViewBag.cityList) {
-        <option value="@item.Value">@item.Text</option>
-    }
-
-}

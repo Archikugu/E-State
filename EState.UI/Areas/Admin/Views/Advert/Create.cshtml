@@ -194,35 +194,7 @@
 
             $ajax({
                 type: "Post",
-                url: "/Admin/Advert/CityGet?CityId=" + cityId,
-                contentType: "html",
-
-                success: function (response) {
-                    debugger
-
-                    $("#CityId").empty();
-                    $("#CityId").append(response);
-                }
-            });
-        });
-    });
-
-
-</script>
-
-
-
-<script type="text/javascript">
-    $(document).ready(function () {
-
-        $("#DistrictId").change(function () {
-            var districtId = $(this).val();
-
-            debugger
-
-            $ajax({
-                type: "Post",
-                url: "/Admin/Advert/DistrictGet?DistrictId=" + districtId,
+                url: "/Admin/Advert/DistrictGet?CityId=" + cityId,
                 contentType: "html",
 
                 success: function (response) {
@@ -238,6 +210,8 @@
 
 </script>
 
+
+
 <script type="text/javascript">
     $(document).ready(function () {
 
@@ -248,59 +222,7 @@
 
             $ajax({
                 type: "Post",
-                url: "/Admin/Advert/SituationGet?SituationId=" + situationId,
-                contentType: "html",
-
-                success: function (response) {
-                    debugger
-
-                    $("#SituationId").empty();
-                    $("#SituationId").append(response);
-                }
-            });
-        });
-    });
-
-</script>
-
-<script type="text/javascript">
-    $(document).ready(function () {
-
-        $("#NeighbourhoodId").change(function () {
-            var neighbourhoodId = $(this).val();
-
-            debugger
-
-            $ajax({
-                type: "Post",
-                url: "/Admin/Advert/NeighbourhoodGet?NeighbourhoodId=" + neighbourhoodId,
-                contentType: "html",
-
-                success: function (response) {
-                    debugger
-
-                    $("#NeighbourhoodId").empty();
-                    $("#NeighbourhoodId").append(response);
-                }
-            });
-        });
-    });
-
-
-</script>
-
-
-<script type="text/javascript">
-    $(document).ready(function () {
-
-        $("#TypeId").change(function () {
-            var typeId = $(this).val();
-
-            debugger
-
-            $ajax({
-                type: "Post",
-                url: "/Admin/Advert/TypeGet?TypeId=" + typeId,
+                url: "/Admin/Advert/TypeGet?SituationId=" + situationId,
                 contentType: "html",
 
                 success: function (response) {
@@ -313,4 +235,31 @@
         });
     });
 
+
 </script>
+
+<script type="text/javascript">
+    $(document).ready(function () {
+
+        $("#DistrictId").change(function () {
+            var districtId = $(this).val();
+
+            debugger
+
+            $ajax({
+                type: "Post",
+                url: "/Admin/Advert/NeigbourhoodGet?DistrictId=" + districtId,
+                contentType: "html",
+
+                success: function (response) {
+                    debugger
+
+                    $("#NeigbourhoodId").empty();
+                    $("#NeigbourhoodId").append(response);
+                }
+            });
+        });
+    });
+
+</script>
+

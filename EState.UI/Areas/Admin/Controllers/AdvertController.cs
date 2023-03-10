@@ -30,7 +30,7 @@ namespace EState.UI.Areas.Admin.Controllers {
         }
 
         public IActionResult Index() {
-            string id = HttpContext.Session.GetString("id");
+            string id = HttpContext.Session.GetString("Id");
 
             var list = _advertService.List(x => x.Status == true && x.UserAdminId == id);
             return View(list);
@@ -74,6 +74,16 @@ namespace EState.UI.Areas.Admin.Controllers {
             DropDown();
             return View();
         }
+        public IActionResult Delete(int id) {
+            var sessionUser = HttpContext.Session.GetString("Id");
+            var delete = _advertService.GetById(id);
+            if (sessionUser.ToString() == delete.UserAdminId) {
+                _advertService.Delete(delete);
+                return RedirectToAction("Index");
+            }
+            return View();
+
+        }
         public List<City> CityGet() {
             List<City> cityList = _cityService.List(x => x.Status == true);
             return cityList;
@@ -104,46 +114,30 @@ namespace EState.UI.Areas.Admin.Controllers {
         public PartialViewResult NeighbourhoodPartial() {
             return PartialView();
         }
-        public PartialViewResult CityPartial() {
-            return PartialView();
-        }
-        public PartialViewResult SituationPartial() {
-            return PartialView();
-        }
-        public IActionResult TypeGet(int TypeId) {
-            List<Entity.Entities.Type> typeList = _typeService.List(x => x.Status == true && x.TypeId == TypeId);
+
+        public IActionResult TypeGet(int SituationId) {
+            List<Entity.Entities.Type> typeList = _typeService.List(x => x.Status == true && x.SituationId == SituationId);
             ViewBag.typeList = new SelectList(typeList, "TypeId", "TypeName");
             return PartialView("TypePartial");
         }
-        public IActionResult DistrictGet(int DistrictId) {
-            List<District> districtList = _districtService.List(x => x.Status == true && x.DistrictId == DistrictId);
+        public IActionResult DistrictGet(int CityId) {
+            List<District> districtList = _districtService.List(x => x.Status == true && x.CityId == CityId);
             ViewBag.district = new SelectList(districtList, "DistrictId", "DistrictName");
             return PartialView("DistrictPartial");
 
         }
-        public IActionResult NeighbourhoodGet(int NeigbourhoodId) {
-            List<Neighbourhood> neighbourhoodList = _neighbourhoodService.List(x => x.Status == true && x.NeighbourhoodId == NeigbourhoodId);
+        public IActionResult NeighbourhoodGet(int DistrictId) {
+            List<Neighbourhood> neighbourhoodList = _neighbourhoodService.List(x => x.Status == true && x.DistrictId == DistrictId);
             ViewBag.neighbourhoodList = new SelectList(neighbourhoodList, "NeighbourhoodId", "NeighbourhoodName");
             return PartialView("NeighbourhoodPartial");
         }
-        public IActionResult CityGet(int CityId) {
-            List<City> cityList = _cityService.List(x => x.Status == true && x.CityId == CityId);
-            ViewBag.cityList = new SelectList(cityList, "CityId", "CityName");
-            return PartialView("CityPartial");
-        }
-        public IActionResult SituationGet(int SituationId) {
-            List<Situation> situationList = _situationService.List(x => x.Status == true && x.SituationId == SituationId);
-            ViewBag.situationList = new SelectList(situationList, "SituationId", "SituationName");
-            return PartialView("SituationPartial");
-        }
-
         public void DropDown() {
             ViewBag.cityList = new SelectList(CityGet(), "CityId", "CityName");
             ViewBag.districtList = new SelectList(DistrictGet(), "DistrictId", "DistrictName");
             ViewBag.situationList = new SelectList(SituationGet(), "SituationId", "SituationName");
             ViewBag.neighbourhoodList = new SelectList(NeighbourhoodGet(), "NeighbourhoodId", "NeighbourhoodName");
             ViewBag.typeList = new SelectList(TypeGet(), "TypeId", "TypeName");
-            
+
         }
     }
 }
