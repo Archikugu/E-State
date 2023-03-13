@@ -9,6 +9,6 @@ namespace Business.Abstract
 {
     public interface IAdvertService : IGenericService<Advert>
     {
-
+        public void RestoreDelete(Advert item);
     }
 }

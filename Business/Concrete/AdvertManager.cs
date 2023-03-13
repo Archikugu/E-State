@@ -40,6 +40,12 @@ namespace Business.Concrete {
             return _advertRepository.List(filter);
         }
 
+        public void RestoreDelete(Advert item) {
+            var delete = _advertRepository.GetById(item.AdvertId);
+            item.Status = true;
+            _advertRepository.Update(delete);
+        }
+
         public void Update(Advert item) {
             _advertRepository.Update(item);
         }

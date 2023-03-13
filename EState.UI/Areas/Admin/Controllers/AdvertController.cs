@@ -35,6 +35,25 @@ namespace EState.UI.Areas.Admin.Controllers {
             var list = _advertService.List(x => x.Status == true && x.UserAdminId == id);
             return View(list);
         }
+        public IActionResult DeleteList() {
+            string id = HttpContext.Session.GetString("Id");
+
+            var list = _advertService.List(x => x.Status == false && x.UserAdminId == id);
+            return View(list);
+        }
+
+        public IActionResult RestoreDeleted(int id) {
+            var sessionUser = HttpContext.Session.GetString("Id");
+
+            var delete = _advertService.GetById(id);
+            if (sessionUser.ToString() == delete.UserAdminId) {
+                _advertService.RestoreDelete(delete);
+                TempData["RestoreDelete"] = "İlan Geri Yükleme İşlemi Başarı ile Gerçekleşti";
+                return RedirectToAction("Index");
+            }
+            return View();
+
+        }
         public IActionResult Create() {
             ViewBag.userid = HttpContext.Session.GetString("Id");
             DropDown();
