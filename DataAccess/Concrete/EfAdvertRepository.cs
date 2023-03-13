@@ -7,14 +7,17 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace DataAccess.Concrete
-{
-    public class EfAdvertRepository : GenericRepository<Advert, DataContext>, IAdvertRepository
-    {
+namespace DataAccess.Concrete {
+    public class EfAdvertRepository : GenericRepository<Advert, DataContext>, IAdvertRepository {
         private DataContext context;
-        public EfAdvertRepository(DataContext context) : base(context)
-        {
+        public EfAdvertRepository(DataContext context) : base(context) {
             this.context = context;
+        }
+
+        public void FullDelete(Advert item) {
+            var advert = context.Adverts.Find(item.AdvertId);
+            context.Adverts.Remove(advert);
+            context.SaveChanges();
         }
     }
 }

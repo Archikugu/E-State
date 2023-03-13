@@ -61,7 +61,7 @@ else {
                 if (willDelete) {
                     $ajax({
                         type: "GET",
-                        url: "/Admin/Advert/Delete=" + id,
+                        url: "/Admin/Advert/FullDelete/" + id,
 
                         success: function () {
                             toastr.error("İlan silme işlemi başarıyla gerçekleşti.")

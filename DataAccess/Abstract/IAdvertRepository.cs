@@ -5,10 +5,8 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace DataAccess.Abstract
-{
-    public interface IAdvertRepository : IRepository<Advert>
-    {
-
+namespace DataAccess.Abstract {
+    public interface IAdvertRepository : IRepository<Advert> {
+        public void FullDelete(Advert item);
     }
 }

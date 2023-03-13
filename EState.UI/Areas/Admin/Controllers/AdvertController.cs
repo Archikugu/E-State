@@ -54,6 +54,18 @@ namespace EState.UI.Areas.Admin.Controllers {
             return View();
 
         }
+
+        public IActionResult FullDeleted(int id) {
+            var sessionUser = HttpContext.Session.GetString("Id");
+
+            var delete = _advertService.GetById(id);
+            if (sessionUser.ToString() == delete.UserAdminId) {
+                _advertService.FullDelete(delete);
+                return RedirectToAction("Index");
+            }
+            return View();
+
+        }
         public IActionResult Create() {
             ViewBag.userid = HttpContext.Session.GetString("Id");
             DropDown();

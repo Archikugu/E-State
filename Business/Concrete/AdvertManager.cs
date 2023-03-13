@@ -28,6 +28,12 @@ namespace Business.Concrete {
             _advertRepository.Update(delete);
         }
 
+        public void FullDelete(Advert item) {
+            var delete = _advertRepository.GetById(item.AdvertId);
+            _advertRepository.FullDelete(delete);
+
+        }
+
         public Advert GetById(int id) {
             return _advertRepository.GetById(id);
         }
